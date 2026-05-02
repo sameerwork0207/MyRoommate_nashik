@@ -32,7 +32,7 @@ async function renderHome() {
             <button onclick="handleLogout()">Logout</button>
           ` : `
             <a href="#" onclick="router.navigate('/owner-login'); return false">Owner Login</a>
-            <a href="#" onclick="router.navigate('/admin-login'); return false">Admin</a>
+            <a href="#" onclick="router.navigate('/admin-login'); return false">Admin Login</a>
           `}
         </div>
       </nav>
