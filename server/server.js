@@ -48,7 +48,7 @@ mongoose
     process.exit(1);
   });
 
-// Serve frontend (catch-all route - must be last)
+// Serve frontend - catch-all route (MUST be after all API routes)
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
