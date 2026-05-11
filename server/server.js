@@ -22,19 +22,28 @@ const __dirname = path.dirname(__filename);
 // middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../public")));
 
-// test route to check server is alive
-app.get("/api", (req, res) => {
-  res.send("API running");
-});
-
-// routes
+// API routes - MUST come before static files
 app.use("/api/auth", authRoutes);
 app.use("/api/listings", listingRoutes);
 app.use("/api/leads", leadRoutes);
 
-// connect DB
+// Serve static files (CSS, JS, images, etc) but not HTML files
+app.use(express.static(path.join(__dirname, "../public"), { 
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  }
+}));
+
+// Serve frontend - catch-all route (MUST be after API routes AND static files)
+app.use((req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
+
+// connect DB and start server
 if (!MONGO_URI) {
   console.error("MONGO_URI is missing in environment variables");
   process.exit(1);
@@ -42,18 +51,13 @@ if (!MONGO_URI) {
 
 mongoose
   .connect(MONGO_URI)
-  .then(() => console.log("DB connected"))
+  .then(() => {
+    console.log("DB connected");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
   .catch((err) => {
     console.error("MongoDB connection error:", err.message);
     process.exit(1);
   });
-
-// Serve frontend - catch-all route (MUST be after all API routes)
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
-// start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
