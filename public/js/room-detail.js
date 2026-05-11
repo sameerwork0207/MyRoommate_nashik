@@ -3,6 +3,23 @@ async function renderRoomDetail() {
   const pathSegments = window.location.pathname.split("/");
   const roomId = pathSegments[pathSegments.length - 1];
 
+  function formatAudienceTag(tag) {
+    switch (tag) {
+      case "boys":
+        return "For Boys";
+      case "girls":
+        return "For Girls";
+      case "bachelors":
+        return "For Bachelors";
+      case "families":
+        return "For Families";
+      case "couples":
+        return "For Couples";
+      default:
+        return "";
+    }
+  }
+
   let listing = null;
 
   try {
@@ -60,6 +77,14 @@ async function renderRoomDetail() {
         <h2>${listing.title}</h2>
         <p><strong>Location:</strong> ${listing.location}</p>
         <div class="detail-rent">₹${listing.rent}/month</div>
+
+        <div class="listing-tags" style="margin-bottom: 18px;">
+          ${
+            (listing.audienceTags || []).length > 0
+              ? listing.audienceTags.map((tag) => `<span class="listing-tag">${formatAudienceTag(tag)}</span>`).join("")
+              : `<span class="listing-tag">Open To All</span>`
+          }
+        </div>
 
         <div class="detail-amenities">
           <h4>Amenities:</h4>

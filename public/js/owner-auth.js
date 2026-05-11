@@ -192,6 +192,24 @@ async function renderOwnerDashboard() {
 
   let listings = [];
 
+  function toTitleCase(value) {
+    return String(value || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+      .join(" ");
+  }
+
+  function getUserLabel(currentUser) {
+    const name = toTitleCase(currentUser.name);
+    if (name) {
+      return name;
+    }
+
+    return currentUser.role === "admin" ? "Admin" : "Owner";
+  }
+
   try {
     const allListings = await ListingAPI.getAll();
     listings = allListings.filter(l => l.ownerId === user.id);
@@ -202,12 +220,29 @@ async function renderOwnerDashboard() {
 
   let showAddForm = false;
 
+  function formatAudienceTag(tag) {
+    switch (tag) {
+      case "boys":
+        return "For Boys";
+      case "girls":
+        return "For Girls";
+      case "bachelors":
+        return "For Bachelors";
+      case "families":
+        return "For Families";
+      case "couples":
+        return "For Couples";
+      default:
+        return "";
+    }
+  }
+
   app.innerHTML = `
     <header>
       <nav class="container">
         <div class="logo" onclick="router.navigate('/')"><span class="logo-main">MyRoommate</span><span class="logo-city">Nashik</span></div>
         <div class="nav-links">
-          <span>${user.name}</span>
+          <span>${getUserLabel(user)}</span>
           <a href="#" onclick="router.navigate('/'); return false">Home</a>
           <button onclick="handleLogout()">Logout</button>
         </div>
@@ -233,6 +268,32 @@ async function renderOwnerDashboard() {
         <div class="form-group">
           <label>Monthly Rent (₹)</label>
           <input type="number" id="roomRent" placeholder="E.g., 15000">
+        </div>
+        <div class="form-group">
+          <label>Suitable For</label>
+          <div class="audience-tag-grid">
+            <label class="audience-tag-option">
+              <input type="checkbox" value="boys" name="roomAudience">
+              <span>For Boys</span>
+            </label>
+            <label class="audience-tag-option">
+              <input type="checkbox" value="girls" name="roomAudience">
+              <span>For Girls</span>
+            </label>
+            <label class="audience-tag-option">
+              <input type="checkbox" value="bachelors" name="roomAudience">
+              <span>For Bachelors</span>
+            </label>
+            <label class="audience-tag-option">
+              <input type="checkbox" value="families" name="roomAudience">
+              <span>For Families</span>
+            </label>
+            <label class="audience-tag-option">
+              <input type="checkbox" value="couples" name="roomAudience">
+              <span>For Couples</span>
+            </label>
+          </div>
+          <small style="color: #666; margin-top: 5px; display: block;">Leave this blank to show the room for all audience types.</small>
         </div>
         <div class="form-group">
           <label>Amenities (comma separated)</label>
@@ -265,6 +326,11 @@ async function renderOwnerDashboard() {
                   <div class="listing-amenities">
                     ${(listing.amenities || []).slice(0, 3).map(a => `<span class="amenity-tag">${a}</span>`).join("")}
                   </div>
+                  ${
+                    (listing.audienceTags || []).length > 0
+                      ? `<div class="listing-tags">${listing.audienceTags.map(tag => `<span class="listing-tag">${formatAudienceTag(tag)}</span>`).join("")}</div>`
+                      : `<p style="margin-top: 10px; font-size: 12px;">Visible to: <strong>All audiences</strong></p>`
+                  }
                   <p style="margin-top: 10px; font-size: 12px;">
                     Status: <strong>${listing.status}</strong>
                   </p>
@@ -287,6 +353,7 @@ async function renderOwnerDashboard() {
     const title = document.getElementById("roomTitle").value;
     const location = document.getElementById("roomLocation").value;
     const rent = parseFloat(document.getElementById("roomRent").value);
+    const audienceTags = Array.from(document.querySelectorAll('input[name="roomAudience"]:checked')).map((input) => input.value);
     const amenitiesStr = document.getElementById("roomAmenities").value;
     const imagesStr = document.getElementById("roomImages").value;
     const amenities = amenitiesStr.split(",").map(a => a.trim()).filter(a => a);
@@ -302,6 +369,7 @@ async function renderOwnerDashboard() {
         title,
         location,
         rent,
+        audienceTags,
         amenities,
         images,
         ownerId: user.id,
@@ -327,7 +395,9 @@ async function renderOwnerDashboard() {
   };
 
   window.handleLogout = function() {
-    logout();
-    router.navigate("/");
+    if (window.confirm("Are you sure you want to log out?")) {
+      logout();
+      router.navigate("/");
+    }
   };
 }

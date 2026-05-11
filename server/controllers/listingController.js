@@ -3,7 +3,10 @@ import Listing from "../models/Listing.js";
 
 export const createListing = async (req, res) => {
   try {
-    const { title, rent, location, amenities, images, status, ownerId } = req.body;
+    const { title, rent, location, audienceTags, amenities, images, status, ownerId } = req.body;
+    const normalizedAudienceTags = Array.isArray(audienceTags)
+      ? [...new Set(audienceTags.filter((tag) => ["boys", "girls", "bachelors", "families", "couples"].includes(tag)))]
+      : [];
 
     if (!title || rent === undefined || !location) {
       return res.status(400).json({
@@ -15,6 +18,7 @@ export const createListing = async (req, res) => {
       title,
       rent,
       location,
+      audienceTags: normalizedAudienceTags,
       amenities: amenities || [],
       images: images || [],
       status,
@@ -70,7 +74,14 @@ export const updateListing = async (req, res) => {
       });
     }
 
-    const updatedListing = await Listing.findByIdAndUpdate(id, req.body, {
+    const allowedAudienceTags = ["boys", "girls", "bachelors", "families", "couples"];
+    const updatePayload = { ...req.body };
+
+    if (Array.isArray(updatePayload.audienceTags)) {
+      updatePayload.audienceTags = [...new Set(updatePayload.audienceTags.filter((tag) => allowedAudienceTags.includes(tag)))];
+    }
+
+    const updatedListing = await Listing.findByIdAndUpdate(id, updatePayload, {
       new: true,
       runValidators: true
     });

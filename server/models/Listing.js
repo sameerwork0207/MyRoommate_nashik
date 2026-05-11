@@ -16,6 +16,12 @@ const listingSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+    audienceTags: [
+      {
+        type: String,
+        enum: ["boys", "girls", "bachelors", "families", "couples"]
+      }
+    ],
     amenities: [String],
     images: [String],
     status: {
