@@ -34,11 +34,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/listings", listingRoutes);
 app.use("/api/leads", leadRoutes);
 
-// Serve frontend
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
 // connect DB
 if (!MONGO_URI) {
   console.error("MONGO_URI is missing in environment variables");
@@ -52,6 +47,11 @@ mongoose
     console.error("MongoDB connection error:", err.message);
     process.exit(1);
   });
+
+// Serve frontend (catch-all route - must be last)
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 // start server
 app.listen(PORT, () => {
