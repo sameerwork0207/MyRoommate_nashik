@@ -1,12 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
-  "env": {
-    "MONGO_URI": "@mongo_uri",
-    "JWT_SECRET": "@jwt_secret",
-    "ADMIN_USERNAME": "@admin_username",
-    "ADMIN_PASSWORD": "@admin_password"
-  },
   "functions": {
     "api/index.js": {
       "memory": 1024,
