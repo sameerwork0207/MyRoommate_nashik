@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Boys PG Near Sandip University | MyRoommate</title>
+    <meta name="description" content="View details for premium student stays, PG, and Hostels in Nashik. Verified properties with zero brokerage.">
+    <meta name="keywords" content="PG in Nashik, Student Housing, Premium PG, Hostel details, MyRoommate Nashik">
+    <meta property="og:title" content="Premium Property Detail | MyRoommate">
+    <meta property="og:description" content="Explore premium student accommodations and PGs in Nashik with MyRoommate.">
+    <meta property="og:type" content="website">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========================================
+           ROOT VARIABLES & RESET
+        ======================================== */
+        :root {
+            --primary: #FCB426;
+            --primary-hover: #e09e1e;
+            --dark: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --light: #f8f9fa;
+            --light-hover: #f1f3f5;
+            --white: #ffffff;
+            --text-main: #222222;
+            --text-muted: #666666;
+            --border: #e2e8f0;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius-lg: 20px;
+            --border-radius-md: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* ========================================
+           NAVBAR
+        ======================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: var(--transition);
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+
+        header.scrolled {
+            box-shadow: var(--shadow-sm);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .nav-actions i { cursor: pointer; transition: var(--transition); }
+        .nav-actions i:hover { color: var(--primary); }
+
+        /* ========================================
+           PROPERTY HEADER & GALLERY
+        ======================================== */
+        .property-page {
+            padding-top: 100px; /* Offset for sticky nav */
+            padding-bottom: 80px;
+        }
+
+        .property-title-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .property-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .property-location {
+            font-size: 1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badges-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .badge.verified { background: #d1fae5; color: #065f46; }
+        .badge.premium { background: rgba(252, 180, 38, 0.15); color: #b47900; }
+        .badge.no-brokerage { background: #f3f4f6; color: var(--text-muted); border: 1px solid var(--border); }
+
+        .header-actions { display: flex; gap: 15px; }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: underline;
+        }
+
+        .action-btn:hover { color: var(--primary); }
+
+        /* GALLERY GRID */
+        .gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+            height: 450px;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .gallery-main { width: 100%; height: 100%; position: relative; }
+        .gallery-side { display: grid; grid-template-rows: 1fr 1fr; gap: 10px; }
+        
+        .gallery-img-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-img-wrapper:hover img { transform: scale(1.05); }
+        .gallery-img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0);
+            transition: var(--transition);
+        }
+        .gallery-img-wrapper:hover::after { background: rgba(0,0,0,0.1); }
+
+        /* ========================================
+           LAYOUT: MAIN CONTENT & SIDEBAR
+        ======================================== */
+        .layout-wrapper {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr;
+            gap: 60px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section:last-child { border-bottom: none; }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        /* ========================================
+           QUICK INFO CARDS
+        ======================================== */
+        .quick-info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: var(--light);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border);
+            flex: 1 1 calc(25% - 15px);
+            min-width: 150px;
+        }
+
+        .info-card i { font-size: 1.2rem; color: var(--text-main); }
+        .info-card span { font-size: 0.95rem; font-weight: 500; }
+
+        /* ========================================
+           DESCRIPTION
+        ======================================== */
+        .description-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* ========================================
+           AMENITIES GRID
+        ======================================== */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+
+        .amenity-item i {
+            width: 24px;
+            color: var(--dark);
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        /* ========================================
+           NEARBY PLACES & RULES
+        ======================================== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .place-card, .rule-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition);
+        }
+
+        .place-card:hover, .rule-card:hover {
+            box-shadow: var(--shadow-sm);
+            border-color: #ddd;
+        }
+
+        .place-card h4 { font-size: 1.05rem; margin-bottom: 5px; color: var(--dark); }
+        .place-card p { font-size: 0.9rem; color: var(--text-muted); display: flex; justify-content: space-between;}
+        
+        .rule-card { display: flex; align-items: flex-start; gap: 15px; }
+        .rule-card i { color: var(--primary); font-size: 1.2rem; margin-top: 2px; }
+        .rule-card h4 { font-size: 1rem; margin-bottom: 3px; color: var(--dark); }
+        .rule-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ========================================
+           STICKY SIDEBAR (PRICING & FORM)
+        ======================================== */
+        .sidebar { position: relative; }
+        
+        .sticky-card {
+            position: sticky;
+            top: 100px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .price-header { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        
+        .price-huge {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .price-huge span { font-size: 1.1rem; font-weight: 500; color: var(--text-muted); }
+
+        .price-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .price-row.total { font-weight: 700; color: var(--dark); margin-top: 5px; padding-top: 10px; border-top: 1px dashed var(--border); }
+
+        .lead-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--dark);
+            box-shadow: 0 0 0 1px var(--dark);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .manager-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .manager-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .manager-info h4 { font-size: 1rem; color: var(--dark); }
+        .manager-info p { font-size: 0.85rem; color: var(--text-muted); }
+
+        .contact-btns {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-call, .btn-whatsapp {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid;
+            transition: var(--transition);
+        }
+
+        .btn-call { background: var(--white); border-color: var(--dark); color: var(--dark); }
+        .btn-call:hover { background: var(--light-hover); }
+        .btn-whatsapp { background: #25D366; border-color: #25D366; color: var(--white); }
+        .btn-whatsapp:hover { background: #128C7E; }
+
+        /* ========================================
+           TRUST SECTION
+        ======================================== */
+        .trust-banner {
+            display: flex;
+            justify-content: space-between;
+            background: var(--light);
+            padding: 30px;
+            border-radius: var(--border-radius-md);
+            margin-top: 40px;
+        }
+
+        .trust-item { display: flex; align-items: center; gap: 15px; }
+        .trust-item i { font-size: 1.8rem; color: var(--primary); }
+        .trust-item h4 { font-size: 1rem; color: var(--dark); }
+        .trust-item p { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* ========================================
+           MOBILE STICKY CTA
+        ======================================== */
+        .mobile-bottom-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            padding: 15px 5%;
+            box-shadow: 0 -4px 12px rgba(0,0,0,0.08);
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ========================================
+           FOOTER (Minimal reuse)
+        ======================================== */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 50px; margin-bottom: 40px; }
+        .footer-brand p { color: #aaa; margin-top: 15px; font-size: 0.9rem; }
+        .footer-links h4 { margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul li { margin-bottom: 10px; color: #aaa; font-size: 0.9rem; }
+        
+        /* ========================================
+           ANIMATIONS & UTILS
+        ======================================== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 1024px) {
+            .layout-wrapper { grid-template-columns: 1.5fr 1fr; gap: 40px; }
+            .gallery { height: 350px; }
+            .trust-banner { flex-direction: column; gap: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .property-title-wrapper { flex-direction: column; }
+            .header-actions { margin-top: 15px; width: 100%; justify-content: space-between; }
+            
+            .gallery { grid-template-columns: 1fr; grid-template-rows: 300px; height: auto; }
+            .gallery-side { display: none; } /* Hide side images on mobile, just show hero */
+
+            .layout-wrapper { grid-template-columns: 1fr; gap: 0; }
+            .sidebar { margin-top: 40px; }
+            .sticky-card { position: static; box-shadow: none; border: 1px solid var(--border); padding: 20px; }
+
+            .amenities-grid, .cards-grid { grid-template-columns: 1fr; }
+            .quick-info-grid { flex-direction: column; }
+            
+            .mobile-bottom-cta { display: flex; }
+            body { padding-bottom: 80px; } /* Room for sticky CTA */
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header id="navbar">
+        <div class="nav-container">
+            <div class="logo">My<span>Roommate</span></div>
+            <nav class="nav-links">
+                <a href="#">PG</a>
+                <a href="#">Hostels</a>
+                <a href="#">Bachelors Flats</a>
+                <a href="#">Premium Stays</a>
+            </nav>
+            <div class="nav-actions">
+                <i class="far fa-user-circle" title="Profile"></i>
+                <i class="fas fa-bars" title="Menu" style="margin-left: 10px;"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container property-page">
+        <!-- HEADER TITLE -->
+        <div class="property-title-wrapper fade-up">
+            <div>
+                <div class="badges-wrapper">
+                    <span class="badge verified"><i class="fas fa-shield-check"></i> Verified Listing</span>
+                    <span class="badge premium"><i class="fas fa-star"></i> Premium Stay</span>
+                    <span class="badge no-brokerage">Zero Brokerage</span>
+                </div>
+                <h1 class="property-title">The Apex Co-Living & Boys PG</h1>
+                <p class="property-location">
+                    <i class="fas fa-map-marker-alt"></i> College Road, Nashik, Maharashtra
+                </p>
+            </div>
+            <div class="header-actions">
+                <button class="action-btn"><i class="far fa-share-square"></i> Share</button>
+                <button class="action-btn"><i class="far fa-heart"></i> Save</button>
+            </div>
+        </div>
+
+        <!-- IMAGE GALLERY -->
+        <div class="gallery fade-up">
+            <div class="gallery-img-wrapper gallery-main">
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Main Room View">
+            </div>
+            <div class="gallery-side">
+                <div class="gallery-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1de2d96674?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Living Area">
+                </div>
+                <div class="gallery-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bathroom">
+                </div>
+            </div>
+        </div>
+
+        <!-- LAYOUT GRID -->
+        <div class="layout-wrapper">
+            
+            <!-- LEFT: MAIN CONTENT -->
+            <div class="main-details">
+                
+                <!-- QUICK INFO -->
+                <div class="section fade-up">
+                    <div class="quick-info-grid">
+                        <div class="info-card"><i class="fas fa-male"></i> <span>Boys Only</span></div>
+                        <div class="info-card"><i class="fas fa-bed"></i> <span>Double Sharing</span></div>
+                        <div class="info-card"><i class="fas fa-couch"></i> <span>Fully Furnished</span></div>
+                        <div class="info-card"><i class="fas fa-snowflake"></i> <span>AC Rooms</span></div>
+                    </div>
+                </div>
+
+                <!-- DESCRIPTION -->
+                <div class="section fade-up">
+                    <h3 class="section-title">About this property</h3>
+                    <p class="description-text">
+                        Welcome to The Apex Co-Living, an exclusive premium PG designed strictly for students. Located just 5 minutes away from major educational hubs in Nashik, this property offers a quiet, highly secure, and productive environment. 
+                        <br><br>
+                        Rooms are spacious, naturally lit, and equipped with dedicated study tables, high-speed Wi-Fi, and premium mattresses. The rent is entirely inclusive of 3-times daily meals, regular housekeeping, and maintenance. Experience hassle-free student living with no hidden charges and zero brokerage.
+                    </p>
+                </div>
+
+                <!-- AMENITIES -->
+                <div class="section fade-up">
+                    <h3 class="section-title">What this place offers</h3>
+                    <div class="amenities-grid">
+                        <div class="amenity-item"><i class="fas fa-wifi"></i> High-Speed WiFi (100Mbps)</div>
+                        <div class="amenity-item"><i class="fas fa-utensils"></i> 3 Meals Included (North Indian & Veg)</div>
+                        <div class="amenity-item"><i class="fas fa-video"></i> 24/7 CCTV Security</div>
+                        <div class="amenity-item"><i class="fas fa-bolt"></i> Power Backup</div>
+                        <div class="amenity-item"><i class="fas fa-book-reader"></i> Study Table & Chair</div>
+                        <div class="amenity-item"><i class="fas fa-broom"></i> Daily Housekeeping</div>
+                        <div class="amenity-item"><i class="fas fa-tshirt"></i> Laundry Service</div>
+                        <div class="amenity-item"><i class="fas fa-motorcycle"></i> Reserved 2-Wheeler Parking</div>
+                        <div class="amenity-item"><i class="fas fa-tint"></i> RO Drinking Water</div>
+                        <div class="amenity-item"><i class="fas fa-fan"></i> Geyser & Appliances</div>
+                    </div>
+                </div>
+
+                <!-- NEARBY COLLEGES -->
+                <div class="section fade-up" id="nearbySection">
+                    <h3 class="section-title">Nearby Colleges</h3>
+                    <div class="cards-grid" id="nearbyGrid">
+                        <div class="place-card">
+                            <h4>Sandip University</h4>
+                            <p><span>Distance: 1.2 km</span> <span><i class="fas fa-walking"></i> 10 mins</span></p>
+                        </div>
+                        <div class="place-card">
+                            <h4>KTHM College</h4>
+                            <p><span>Distance: 2.5 km</span> <span><i class="fas fa-bus"></i> 15 mins</span></p>
+                        </div>
+                        <div class="place-card">
+                            <h4>KK Wagh Engineering</h4>
+                            <p><span>Distance: 4.0 km</span> <span><i class="fas fa-motorcycle"></i> 20 mins</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RULES -->
+                <div class="section fade-up" id="rulesSection">
+                    <h3 class="section-title">House Rules</h3>
+                    <div class="cards-grid" id="rulesGrid">
+                        <div class="rule-card">
+                            <i class="fas fa-door-closed"></i>
+                            <div>
+                                <h4>Gate Timings</h4>
+                                <p>Entry restricted after 10:30 PM. Keys not provided for main gate.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <i class="fas fa-ban"></i>
+                            <div>
+                                <h4>No Smoking/Drinking</h4>
+                                <p>Strictly prohibited inside the premises to maintain student decorum.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Visitor Policy</h4>
+                                <p>Outside visitors not allowed in rooms. Lobby access till 8:00 PM only.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <i class="fas fa-file-contract"></i>
+                            <div>
+                                <h4>Lock-in Period</h4>
+                                <p>Minimum 6 months stay required. 1-month notice period before vacating.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End Main Details -->
+
+            <!-- RIGHT: STICKY SIDEBAR -->
+            <div class="sidebar fade-up">
+                <div class="sticky-card">
+                    <!-- Pricing -->
+                    <div class="price-header">
+                        <div class="price-huge">₹8,500<span>/month</span></div>
+                        <div class="price-breakdown">
+                            <div class="price-row"><span>Deposit (Refundable)</span> <span>₹15,000</span></div>
+                            <div class="price-row"><span>Brokerage</span> <span style="color: #10b981; font-weight: 600;">₹0 (Free)</span></div>
+                            <div class="price-row"><span>Maintenance</span> <span>Included</span></div>
+                            <div class="price-row total"><span>Total Move-in Cost</span> <span>₹23,500</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Lead Form -->
+                    <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: var(--dark);">Request a Property Visit</h3>
+                    <form class="lead-form" id="leadForm">
+                        <div class="form-group">
+                            <input type="text" id="leadName" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="leadPhone" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="leadCollege" placeholder="College / University Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" id="leadDate" required style="color: var(--text-muted);">
+                        </div>
+                        <button type="submit" class="btn-primary" id="leadSubmitBtn">Schedule Visit for Free</button>
+                        <p id="leadFormMsg" style="font-size: 0.85rem; margin-top: 10px; display: none;"></p>
+                    </form>
+
+                    <!-- Manager Info -->
+                    <div class="manager-profile">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Manager" class="manager-img">
+                        <div class="manager-info">
+                            <h4>Rahul Desai</h4>
+                            <p><i class="fas fa-check-circle" style="color: #10b981;"></i> Verified Property Manager</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-btns">
+                        <button class="btn-call"><i class="fas fa-phone-alt"></i> Call</button>
+                        <button class="btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                    </div>
+                </div>
+            </div> <!-- End Sidebar -->
+
+        </div> <!-- End Layout Wrapper -->
+
+        <!-- TRUST SECTION -->
+        <div class="trust-banner fade-up">
+            <div class="trust-item">
+                <i class="fas fa-shield-check"></i>
+                <div>
+                    <h4>100% Verified</h4>
+                    <p>Physically checked by our team.</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-hand-holding-usd"></i>
+                <div>
+                    <h4>Zero Brokerage</h4>
+                    <p>Save money. Connect directly.</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-user-graduate"></i>
+                <div>
+                    <h4>Student Friendly</h4>
+                    <p>Curated specifically for students.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MOBILE STICKY CTA -->
+    <div class="mobile-bottom-cta">
+        <div>
+            <div style="font-weight: 800; font-size: 1.2rem; color: var(--dark);">₹8,500<span style="font-size: 0.8rem; font-weight: 500; color: var(--text-muted);">/mo</span></div>
+            <div style="font-size: 0.8rem; color: #10b981; font-weight: 600;">Zero Brokerage</div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn-primary" style="padding: 12px 20px; font-size: 0.9rem;">Schedule Visit</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo" style="color: var(--white);">My<span>Roommate</span></div>
+                    <p>MyRoommate is a modern student housing and roommate platform for PGs, Hostels, Bachelors Flats, and Premium Student Stays.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Explore Nashik Stays</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Cancellation Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; color: #aaa; font-size: 0.85rem;">
+                &copy; <script>document.write(new Date().getFullYear())</script> MyRoommate. All rights reserved. Built for Students.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Sticky Navbar Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Fade Up Animation on Scroll (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach((elem) => {
+            observer.observe(elem);
+        });
+        
+        // Trigger initially
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/navbar.js"></script>
+</body>
+</html>

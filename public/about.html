@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | MyRoommate</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ========================================
+           ROOT VARIABLES & RESET
+        ======================================== */
+        :root {
+            --primary: #FCB426;
+            --primary-hover: #e09e1e;
+            --dark: #0a0a0a;
+            --dark-surface: #1a1a1a;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --text-main: #222222;
+            --text-muted: #666666;
+            --border: #e2e8f0;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 30px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--white); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 5%; }
+        .section { padding: 100px 0; }
+        .section-light { background: var(--light); }
+        .section-dark { background: var(--dark); color: var(--white); }
+
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-title { font-size: 2.5rem; font-weight: 800; color: var(--dark); margin-bottom: 15px; letter-spacing: -0.5px; }
+        .section-dark .section-title { color: var(--white); }
+        .section-subtitle { font-size: 1.1rem; color: var(--text-muted); }
+        .section-dark .section-subtitle { color: #aaaaaa; }
+
+        /* ========================================
+           NAVBAR
+        ======================================== */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 20px 0; z-index: 1000; transition: var(--transition);
+            background: transparent;
+        }
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); padding: 15px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        header.scrolled .logo, header.scrolled .nav-links a, header.scrolled .nav-actions i { color: var(--dark); }
+        
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; padding: 0 5%; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--white); letter-spacing: -0.5px; transition: var(--transition); }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: var(--white); font-weight: 500; font-size: 0.95rem; transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-actions { display: flex; gap: 20px; color: var(--white); font-size: 1.2rem; transition: var(--transition); }
+        .nav-actions i { cursor: pointer; transition: var(--transition); }
+        .nav-actions i:hover { color: var(--primary); }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .hero::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(10,10,10,0.9) 100%);
+        }
+        .hero-content {
+            position: relative; z-index: 2; text-align: center; color: var(--white); max-width: 800px; padding: 0 20px;
+        }
+        .hero-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero-content p { font-size: 1.25rem; font-weight: 400; opacity: 0.9; margin-bottom: 30px; }
+
+        /* ========================================
+           OUR STORY
+        ======================================== */
+        .story-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+        }
+        .story-content h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 25px; color: var(--dark); line-height: 1.2; }
+        .story-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.8; }
+        .story-content .highlight { color: var(--primary); font-weight: 600; }
+        .story-image { position: relative; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+        .story-image img { width: 100%; display: block; }
+        .story-badge {
+            position: absolute; bottom: 30px; left: -30px; background: var(--white);
+            padding: 20px 30px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+            display: flex; flex-direction: column; gap: 5px;
+        }
+        .story-badge span { font-size: 2rem; font-weight: 800; color: var(--primary); }
+        .story-badge p { font-size: 0.9rem; font-weight: 600; color: var(--dark); margin: 0; }
+
+        /* ========================================
+           MISSION & VISION
+        ======================================== */
+        .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .mv-card {
+            background: var(--white); padding: 50px 40px; border-radius: var(--radius-lg);
+            border: 1px solid var(--border); transition: var(--transition);
+        }
+        .mv-card:hover { box-shadow: var(--shadow-md); transform: translateY(-5px); border-color: transparent; }
+        .mv-icon {
+            width: 60px; height: 60px; background: rgba(252, 180, 38, 0.1); color: var(--primary);
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border-radius: 16px; margin-bottom: 25px;
+        }
+        .mv-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: var(--dark); }
+        .mv-card p { color: var(--text-muted); font-size: 1.05rem; }
+
+        /* ========================================
+           WHY CHOOSE US
+        ======================================== */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+        .feature-card {
+            padding: 40px 30px; background: var(--white); border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm); transition: var(--transition); border: 1px solid var(--border);
+        }
+        .feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-10px); border-color: var(--primary); }
+        .feature-card i { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
+        .feature-card h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
+        .feature-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ========================================
+           HOW IT WORKS
+        ======================================== */
+        .steps-wrapper { display: flex; justify-content: space-between; position: relative; margin-top: 60px; }
+        .steps-wrapper::after {
+            content: ''; position: absolute; top: 40px; left: 10%; width: 80%; height: 2px;
+            background: dashed 2px var(--border); z-index: 1;
+        }
+        .step { flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 20px; }
+        .step-number {
+            width: 80px; height: 80px; background: var(--white); border: 2px solid var(--primary);
+            color: var(--primary); font-size: 1.8rem; font-weight: 800; display: flex; align-items: center;
+            justify-content: center; border-radius: 50%; margin: 0 auto 20px; box-shadow: 0 0 0 10px var(--white);
+        }
+        .step h4 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--dark); }
+        .step p { color: var(--text-muted); font-size: 0.95rem; }
+
+        /* ========================================
+           TRUST STATS
+        ======================================== */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-item h3 { font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; line-height: 1; }
+        .stat-item p { font-size: 1.1rem; font-weight: 500; color: #aaaaaa; }
+
+        /* ========================================
+           TEAM SECTION
+        ======================================== */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 60px; }
+        .team-card { text-align: center; }
+        .team-img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; border: 4px solid var(--light); box-shadow: var(--shadow-md); transition: var(--transition); }
+        .team-card:hover .team-img { transform: scale(1.05); border-color: var(--primary); }
+        .team-card h4 { font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+        .team-card span { display: block; color: var(--primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; }
+        .team-card p { color: var(--text-muted); font-size: 0.9rem; padding: 0 10px; }
+
+        /* ========================================
+           TESTIMONIALS
+        ======================================== */
+        .testi-section {
+            background-image: url('https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center; position: relative; background-attachment: fixed;
+        }
+        .testi-section::after { content: ''; position: absolute; inset: 0; background: rgba(10, 10, 10, 0.85); }
+        .testi-container { position: relative; z-index: 2; }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .testi-card {
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: var(--radius-md); color: var(--white);
+        }
+        .testi-card i { color: var(--primary); font-size: 1.5rem; margin-bottom: 20px; }
+        .testi-card p { font-size: 1.05rem; font-style: italic; margin-bottom: 25px; line-height: 1.7; opacity: 0.9; }
+        .testi-author { display: flex; align-items: center; gap: 15px; }
+        .testi-author img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary); }
+        .testi-author h4 { font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
+        .testi-author span { font-size: 0.8rem; color: #aaaaaa; }
+
+        /* ========================================
+           SOCIAL MEDIA
+        ======================================== */
+        .social-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 40px; }
+        .social-item { position: relative; border-radius: var(--radius-md); overflow: hidden; aspect-ratio: 1; }
+        .social-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .social-item::after {
+            content: '\f16d'; font-family: 'Font Awesome 6 Brands'; position: absolute; inset: 0; background: rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 2rem;
+            opacity: 0; transition: var(--transition);
+        }
+        .social-item:hover img { transform: scale(1.1); }
+        .social-item:hover::after { opacity: 1; }
+
+        /* ========================================
+           CTA BANNER
+        ======================================== */
+        .cta-banner {
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            border-radius: var(--radius-lg); padding: 80px 40px; text-align: center; color: var(--white);
+            box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+        }
+        .cta-banner::before {
+            content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(252, 180, 38, 0.2) 0%, rgba(0,0,0,0) 70%); border-radius: 50%;
+        }
+        .cta-banner h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; }
+        .cta-banner p { font-size: 1.1rem; color: #aaaaaa; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .cta-btns { display: flex; justify-content: center; gap: 20px; }
+        
+        .btn { padding: 16px 32px; border-radius: 12px; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: var(--transition); border: none; display: inline-flex; align-items: center; gap: 10px; }
+        .btn-primary { background: var(--primary); color: var(--dark); }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(252, 180, 38, 0.3); }
+        .btn-outline { background: transparent; border: 2px solid var(--border); color: var(--white); }
+        .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+        /* ========================================
+           FOOTER (Minimal)
+        ======================================== */
+        footer { background: var(--dark); color: var(--white); padding: 60px 0 20px; border-top: 1px solid #222; }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+        .footer-brand .logo { margin-bottom: 15px; display: block; }
+        .footer-brand p { color: #aaaaaa; max-width: 300px; font-size: 0.9rem; }
+        .footer-links h4 { font-size: 1.1rem; margin-bottom: 20px; color: var(--primary); }
+        .footer-links ul li { margin-bottom: 12px; }
+        .footer-links a { color: #aaaaaa; font-size: 0.9rem; transition: var(--transition); }
+        .footer-links a:hover { color: var(--white); padding-left: 5px; }
+        .footer-bottom { text-align: center; border-top: 1px solid #222; padding-top: 20px; color: #aaaaaa; font-size: 0.85rem; }
+
+        /* ========================================
+           ANIMATIONS & UTILS
+        ======================================== */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        @media (max-width: 1024px) {
+            .hero-content h1 { font-size: 3rem; }
+            .story-grid { gap: 40px; }
+            .story-badge { left: 20px; bottom: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .story-grid, .mv-grid { grid-template-columns: 1fr; }
+            .story-image { order: -1; }
+            .steps-wrapper { flex-direction: column; gap: 40px; }
+            .steps-wrapper::after { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .social-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-btns { flex-direction: column; }
+            .cta-banner { padding: 60px 20px; }
+            .cta-banner h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">My<span>Roommate</span></a>
+            <nav class="nav-links">
+                <a href="#">PG</a>
+                <a href="#">Hostels</a>
+                <a href="#">Bachelors Flats</a>
+                <a href="#">Premium Stays</a>
+            </nav>
+            <div class="nav-actions">
+                <i class="far fa-user-circle"></i>
+                <i class="fas fa-bars" style="margin-left: 10px;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content fade-up">
+            <h1>Making Student Housing Simple & Trusted</h1>
+            <p>We help students find verified stays without brokerage, fake listings, and unnecessary stress.</p>
+        </div>
+    </section>
+
+    <!-- OUR STORY SECTION -->
+    <section class="section container">
+        <div class="story-grid">
+            <div class="story-content fade-up">
+                <h2>Built by Students,<br>For Students.</h2>
+                <p>Finding a place to stay in a new city shouldn't be the hardest part of college. Yet, students consistently face fake listings, exorbitant broker fees, and unverified, unsafe accommodations.</p>
+                <p>We started in <span class="highlight">Nashik, Maharashtra</span> with a simple mission: to fix the broken student rental market. We realized that traditional real estate platforms aren't built for students. They lack transparency and cater to commercial dealers.</p>
+                <p>That's why we created <strong>MyRoommate</strong>. A curated, student-first platform where every PG, hostel, and flat is physically verified by our team, ensuring zero brokerage and 100% peace of mind for both students and parents.</p>
+            </div>
+            <div class="story-image fade-up">
+                <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students moving in">
+                <div class="story-badge">
+                    <span>100%</span>
+                    <p>Verified Stays</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION SECTION -->
+    <section class="section section-light">
+        <div class="container mv-grid">
+            <div class="mv-card fade-up">
+                <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+                <h3>Our Mission</h3>
+                <p>To provide a transparent, zero-brokerage, and completely verified housing experience for students, ensuring they have a safe and comfortable environment to focus on their education.</p>
+            </div>
+            <div class="mv-card fade-up">
+                <div class="mv-icon"><i class="fas fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                <p>To become India's most trusted and widely used student housing ecosystem, standardizing the quality of living for millions of students relocating every year.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section container">
+        <div class="section-header fade-up">
+            <h2 class="section-title">The MyRoommate Difference</h2>
+            <p class="section-subtitle">We aren't a marketplace for brokers. We are a curated ecosystem for students.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card fade-up">
+                <i class="fas fa-shield-check"></i>
+                <h4>Verified Listings</h4>
+                <p>Our internal team physically visits and audits every single property before it goes live on our platform.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <i class="fas fa-hand-holding-usd"></i>
+                <h4>Zero Brokerage</h4>
+                <p>Save your pocket money. We connect you directly with property managers without any hidden agent fees.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <i class="fas fa-user-graduate"></i>
+                <h4>Student First</h4>
+                <p>No family-only restrictions. Every property listed is explicitly welcoming to bachelors and college students.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <i class="fas fa-headset"></i>
+                <h4>Local Support</h4>
+                <p>New to the city? Our local support team helps guide you to the safest areas near your specific college.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <i class="fas fa-lock"></i>
+                <h4>Safe & Secure</h4>
+                <p>We prioritize properties with CCTV, wardens, and secure entry, giving parents absolute peace of mind.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <i class="fas fa-crown"></i>
+                <h4>Premium Options</h4>
+                <p>Looking for an upgrade? We curate exclusive luxury co-living spaces with gym, AC, and premium food options.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Three simple steps to your new college home.</p>
+            </div>
+            <div class="steps-wrapper fade-up">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Search & Shortlist</h4>
+                    <p>Browse verified PGs and flats near your specific college with smart student filters.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Request Visit</h4>
+                    <p>Schedule a free property visit directly through our platform with zero broker calls.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Move In Easily</h4>
+                    <p>Finalize your rent securely and move into your new student home hassle-free.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST STATS SECTION -->
+    <section class="section section-dark">
+        <div class="container stats-grid fade-up">
+            <div class="stat-item">
+                <h3 class="counter" data-target="150">0</h3>
+                <p>Verified Properties</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="2000">0</h3>
+                <p>Students Helped</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="100">0</h3>
+                <p>% Brokerage Free</p>
+            </div>
+            <div class="stat-item">
+                <h3 class="counter" data-target="1">0</h3>
+                <p>City Focus (Nashik)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="section container">
+        <div class="section-header fade-up">
+            <h2 class="section-title">Meet the Team</h2>
+            <p class="section-subtitle">Driven by students, solving problems for students.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-card fade-up">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Founder" class="team-img">
+                <h4>Armaan Sayyad</h4>
+                <span>Founder & CEO</span>
+                <p>Started MyRoommate to eliminate the stress and scams students face when moving to a new city.</p>
+            </div>
+            <div class="team-card fade-up">
+                <div class="team-img" style="background: #eee; display: flex; align-items: center; justify-content: center; color: #ccc;">
+                    <i class="fas fa-user" style="font-size: 4rem;"></i>
+                </div>
+                <h4>Operations Lead</h4>
+                <span>Property Verification</span>
+                <p>Ensures every property listed meets our strict safety, hygiene, and student-friendly standards.</p>
+            </div>
+            <div class="team-card fade-up">
+                <div class="team-img" style="background: #eee; display: flex; align-items: center; justify-content: center; color: #ccc;">
+                    <i class="fas fa-user" style="font-size: 4rem;"></i>
+                </div>
+                <h4>Student Success</h4>
+                <span>Community Support</span>
+                <p>Dedicated to helping students with smooth onboarding, local guidance, and issue resolution.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section testi-section">
+        <div class="container testi-container">
+            <div class="section-header fade-up">
+                <h2 class="section-title" style="color: var(--white);">Student Stories</h2>
+                <p class="section-subtitle" style="color: #ccc;">Don't just take our word for it.</p>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card fade-up">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"Finding a PG near college was a nightmare with brokers asking for a month's rent. MyRoommate saved me so much money and I found a verified, safe place in 2 days."</p>
+                    <div class="testi-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Student">
+                        <div>
+                            <h4>Riya Desai</h4>
+                            <span>Engineering Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card fade-up">
+                    <i class="fas fa-quote-left"></i>
+                    <p>"As a parent sitting in another city, I was worried about my son's accommodation. This platform's verification system gave us immense peace of mind."</p>
+                    <div class="testi-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Parent">
+                        <div>
+                            <h4>Sanjay Patil</h4>
+                            <span>Student Parent</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA -->
+    <section class="section container">
+        <div class="section-header fade-up">
+            <h2 class="section-title">Join Our Community</h2>
+            <p class="section-subtitle">Follow us on Instagram for local student tips and new property drops.</p>
+        </div>
+        <div class="social-grid fade-up">
+            <div class="social-item"><img src="https://images.unsplash.com/photo-1522771731478-44eb939a3971?ixlib=rb-4.0.3&w=400&q=80" alt="Room"></div>
+            <div class="social-item"><img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?ixlib=rb-4.0.3&w=400&q=80" alt="Students"></div>
+            <div class="social-item"><img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&w=400&q=80" alt="Hostel"></div>
+            <div class="social-item"><img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&w=400&q=80" alt="College"></div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="section container">
+        <div class="cta-banner fade-up">
+            <h2>Find Your Perfect Student Stay Today</h2>
+            <p>Join thousands of students who have upgraded their living experience with zero brokerage and total transparency.</p>
+            <div class="cta-btns">
+                <button class="btn btn-primary">Explore Properties <i class="fas fa-arrow-right"></i></button>
+                <button class="btn btn-outline">Contact Support</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="font-size: 1.4rem; color: var(--white);">My<span>Roommate</span></a>
+                    <p>The smartest, safest, and most premium way for students to find PGs, hostels, and bachelor flats without paying brokerage.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Properties</h4>
+                    <ul>
+                        <li><a href="#">Boys PG</a></li>
+                        <li><a href="#">Girls Hostels</a></li>
+                        <li><a href="#">Co-Living Spaces</a></li>
+                        <li><a href="#">Premium Stays</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Tenant Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <script>document.write(new Date().getFullYear())</script> MyRoommate. All rights reserved. Built for Students.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Sticky Navbar Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Fade-Up Animations & Counters
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        let animatedCounters = false;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Trigger Counters if in view
+                    if (entry.target.classList.contains('stats-grid') && !animatedCounters) {
+                        const counters = document.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            counter.innerText = '0';
+                            const target = +counter.getAttribute('data-target');
+                            const speed = 200; // Lower is faster
+                            
+                            const updateCounter = () => {
+                                const count = +counter.innerText;
+                                const increment = target / speed;
+                                
+                                if (count < target) {
+                                    counter.innerText = Math.ceil(count + increment);
+                                    setTimeout(updateCounter, 10);
+                                } else {
+                                    counter.innerText = target + (target === 100 ? '' : '+');
+                                }
+                            };
+                            updateCounter();
+                        });
+                        animatedCounters = true;
+                    }
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach((elem) => {
+            observer.observe(elem);
+        });
+        
+        // Initial trigger
+        window.dispatchEvent(new Event('scroll'));
+    </script>
+    <script src="/js/navbar.js"></script>
+</body>
+</html>
