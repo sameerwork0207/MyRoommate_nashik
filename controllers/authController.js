@@ -1,24 +1,41 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
-// Setup Nodemailer Transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS  // Use Gmail App Password (not account password)
-  }
-});
+// Load environment variables
+dotenv.config();
 
-// Verify connection on startup
-transporter.verify((error) => {
-  if (error) {
-    console.warn('[EMAIL] Transporter not ready (check EMAIL_USER / App Password):', error.message);
-  } else {
-    console.log('[EMAIL] Transporter ready ✓ -', process.env.EMAIL_USER);
-  }
-});
+// Setup Nodemailer Transporter with better error handling
+let transporter = null;
+let emailReady = false;
+
+console.log('[DEBUG] EMAIL_USER:', process.env.EMAIL_USER ? '✓ Set' : '✗ Missing');
+console.log('[DEBUG] EMAIL_PASS:', process.env.EMAIL_PASS ? '✓ Set' : '✗ Missing');
+
+if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS  // Use Gmail App Password (not account password)
+    }
+  });
+
+  // Verify connection on startup
+  transporter.verify((error) => {
+    if (error) {
+      console.warn('[EMAIL] ⚠️ Transporter not ready (check EMAIL_USER / App Password):', error.message);
+      console.log('[EMAIL] 💡 Dev Mode: OTPs will be logged to console instead');
+      emailReady = false;
+    } else {
+      console.log('[EMAIL] ✓ Transporter ready -', process.env.EMAIL_USER);
+      emailReady = true;
+    }
+  });
+} else {
+  console.log('[EMAIL] 💡 No email credentials provided - running in DEV mode');
+}
 
 // Generate 4 digit OTP
 const generateOTP = () => Math.floor(1000 + Math.random() * 9000).toString();
@@ -49,6 +66,9 @@ export const sendOtp = async (req, res) => {
     user.otpExpiry = otpExpiry;
     await user.save();
 
+    // Log OTP for debugging
+    console.log(`[OTP Generated] Email: ${email}, OTP: ${otp}`);
+
     // Send Email
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       await transporter.sendMail({
@@ -57,8 +77,6 @@ export const sendOtp = async (req, res) => {
         subject: "Your MyRoommate Login OTP",
         html: `<p>Your OTP for MyRoommate login is: <strong>${otp}</strong></p><p>It is valid for 10 minutes.</p>`
       });
-    } else {
-      console.log(`[DEV MODE] OTP for ${email}: ${otp}`);
     }
 
     res.json({ message: "OTP sent successfully to email" });

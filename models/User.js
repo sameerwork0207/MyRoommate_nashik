@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    required: false  // Optional for OTP-based auth
   },
   phone: {
     type: String,
